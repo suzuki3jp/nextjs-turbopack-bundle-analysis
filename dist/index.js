@@ -30382,7 +30382,7 @@ async function run() {
         const baseWorkDir = path.join(baseTmp, inputs.workingDirectory);
         await exec.exec('npx', ['--yes', '--package', '@antfu/ni', 'nci'], { cwd: baseWorkDir });
         await exec.exec('sh', ['-c', inputs.buildCommand], { cwd: baseWorkDir });
-        const baseAnalysis = (0, analyze_1.loadAnalysis)(path.join(baseWorkDir, inputs.buildOutputDirectory, 'analyze'));
+        const baseAnalysis = (0, analyze_1.loadAnalysis)(path.join(baseWorkDir, inputs.buildOutputDirectory, 'diagnostics', 'analyze'));
         core.info(`Base analysis: ${baseAnalysis.routes.length} routes`);
         core.endGroup();
         // Analyze PR branch
@@ -30391,7 +30391,7 @@ async function run() {
         const prWorkDir = path.join(prTmp, inputs.workingDirectory);
         await exec.exec('npx', ['--yes', '--package', '@antfu/ni', 'nci'], { cwd: prWorkDir });
         await exec.exec('sh', ['-c', inputs.buildCommand], { cwd: prWorkDir });
-        const prAnalysis = (0, analyze_1.loadAnalysis)(path.join(prWorkDir, inputs.buildOutputDirectory, 'analyze'));
+        const prAnalysis = (0, analyze_1.loadAnalysis)(path.join(prWorkDir, inputs.buildOutputDirectory, 'diagnostics', 'analyze'));
         core.info(`PR analysis: ${prAnalysis.routes.length} routes`);
         core.endGroup();
         // Compare and comment

@@ -64,7 +64,7 @@ async function run(): Promise<void> {
     await exec.exec('npx', ['--yes', '--package', '@antfu/ni', 'nci'], { cwd: baseWorkDir });
     await exec.exec('sh', ['-c', inputs.buildCommand], { cwd: baseWorkDir });
     const baseAnalysis = loadAnalysis(
-      path.join(baseWorkDir, inputs.buildOutputDirectory, 'analyze')
+      path.join(baseWorkDir, inputs.buildOutputDirectory, 'diagnostics', 'analyze')
     );
     core.info(`Base analysis: ${baseAnalysis.routes.length} routes`);
     core.endGroup();
@@ -76,7 +76,7 @@ async function run(): Promise<void> {
     await exec.exec('npx', ['--yes', '--package', '@antfu/ni', 'nci'], { cwd: prWorkDir });
     await exec.exec('sh', ['-c', inputs.buildCommand], { cwd: prWorkDir });
     const prAnalysis = loadAnalysis(
-      path.join(prWorkDir, inputs.buildOutputDirectory, 'analyze')
+      path.join(prWorkDir, inputs.buildOutputDirectory, 'diagnostics', 'analyze')
     );
     core.info(`PR analysis: ${prAnalysis.routes.length} routes`);
     core.endGroup();
