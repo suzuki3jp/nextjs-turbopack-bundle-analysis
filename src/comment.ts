@@ -46,9 +46,11 @@ export function formatComment(
 
   return [
     COMMENT_MARKER,
-    '## Next.js Turbopack Bundle Analysis',
+    '## 📦 Next.js Turbopack Bundle Analysis',
     '',
     table,
+    '',
+    '_Powered by [nextjs-turbopack-bundle-analysis](https://github.com/suzuki3jp/nextjs-turbopack-bundle-analysis)_',
   ].join('\n');
 }
 
