@@ -1,5 +1,12 @@
 # nextjs-turbopack-bundle-analysis
 
+## 0.0.4
+
+### Patch Changes
+
+- 2cfde5e: feat: add 📦 emoji to comment header and Powered by footer link
+- d322dd0: fix: resolve diagnostics/analyze/ path internally instead of requiring it in build-output-directory
+
 ## 0.0.3
 
 ### Patch Changes
