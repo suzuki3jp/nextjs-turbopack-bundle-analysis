@@ -33,10 +33,13 @@ jobs:
 
 ### Monorepo
 
+For monorepos, set `build-output-directory` to the path of the `.next` directory relative to the repository root.
+
 ```yaml
 - uses: suzuki3jp/nextjs-turbopack-bundle-analysis@v1
   with:
-    working-directory: apps/web
+    build-output-directory: apps/web/.next
+    build-command: pnpm --filter @myapp/web exec next experimental-analyze
 ```
 
 ## Example Comment
@@ -63,8 +66,7 @@ The action posts a comment like this on pull requests:
 
 | Input                         | Description                                                                      | Required | Default                         |
 | ----------------------------- | -------------------------------------------------------------------------------- | -------- | ------------------------------- |
-| `working-directory`           | Working directory of the Next.js project (for monorepos)                         | No       | `.`                             |
-| `build-output-directory`      | Next.js build output directory                                                   | No       | `.next`                         |
+| `build-output-directory`      | Path to the `.next` directory relative to the repository root                   | No       | `.next`                         |
 | `build-command`               | Command to build and analyze the bundle                                          | No       | `npx next experimental-analyze` |
 | `budget`                      | First-page load JS size budget in bytes. Routes exceeding this are marked with ⚠️ | No       | —                               |
 | `budget-percent-increase-red` | Percentage increase threshold to mark route as 🔴                                 | No       | `20`                            |

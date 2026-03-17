@@ -13,7 +13,6 @@ function parseInputs(): ActionInputs {
   const minimumChangeThreshold = core.getInput('minimum-change-threshold');
 
   return {
-    workingDirectory: core.getInput('working-directory') || '.',
     buildOutputDirectory: core.getInput('build-output-directory') || '.next',
     buildCommand: core.getInput('build-command') || 'npx next experimental-analyze',
     budget: budget ? parseInt(budget, 10) : undefined,
@@ -53,18 +52,16 @@ async function run(): Promise<void> {
 
   core.info(`Base SHA: ${baseSha}`);
   core.info(`PR SHA: ${prSha}`);
-  core.info(`Working directory: ${inputs.workingDirectory}`);
   core.info(`Build command: ${inputs.buildCommand}`);
 
   try {
     // Analyze base branch
     core.startGroup('Analyzing base branch');
     await exec.exec('git', ['worktree', 'add', baseTmp, baseSha]);
-    const baseWorkDir = path.join(baseTmp, inputs.workingDirectory);
-    await exec.exec('npx', ['--yes', '--package', '@antfu/ni', 'nci'], { cwd: baseWorkDir });
-    await exec.exec('sh', ['-c', inputs.buildCommand], { cwd: baseWorkDir });
+    await exec.exec('npx', ['--yes', '--package', '@antfu/ni', 'nci'], { cwd: baseTmp });
+    await exec.exec('sh', ['-c', inputs.buildCommand], { cwd: baseTmp });
     const baseAnalysis = loadAnalysis(
-      path.join(baseWorkDir, inputs.buildOutputDirectory, 'diagnostics', 'analyze')
+      path.join(baseTmp, inputs.buildOutputDirectory, 'diagnostics', 'analyze')
     );
     core.info(`Base analysis: ${baseAnalysis.routes.length} routes`);
     core.endGroup();
@@ -72,11 +69,10 @@ async function run(): Promise<void> {
     // Analyze PR branch
     core.startGroup('Analyzing PR branch');
     await exec.exec('git', ['worktree', 'add', prTmp, prSha]);
-    const prWorkDir = path.join(prTmp, inputs.workingDirectory);
-    await exec.exec('npx', ['--yes', '--package', '@antfu/ni', 'nci'], { cwd: prWorkDir });
-    await exec.exec('sh', ['-c', inputs.buildCommand], { cwd: prWorkDir });
+    await exec.exec('npx', ['--yes', '--package', '@antfu/ni', 'nci'], { cwd: prTmp });
+    await exec.exec('sh', ['-c', inputs.buildCommand], { cwd: prTmp });
     const prAnalysis = loadAnalysis(
-      path.join(prWorkDir, inputs.buildOutputDirectory, 'diagnostics', 'analyze')
+      path.join(prTmp, inputs.buildOutputDirectory, 'diagnostics', 'analyze')
     );
     core.info(`PR analysis: ${prAnalysis.routes.length} routes`);
     core.endGroup();

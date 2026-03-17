@@ -18,7 +18,6 @@ export interface RouteComparison {
 }
 
 export interface ActionInputs {
-  workingDirectory: string;
   buildOutputDirectory: string;
   buildCommand: string;
   budget?: number;

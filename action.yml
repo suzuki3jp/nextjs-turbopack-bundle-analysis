@@ -5,10 +5,6 @@ branding:
   icon: 'bar-chart-2'
   color: 'blue'
 inputs:
-  working-directory:
-    description: 'Working directory of the Next.js project (for monorepos)'
-    required: false
-    default: '.'
   build-output-directory:
     description: 'Next.js build output directory (default: .next). The action resolves diagnostics/analyze/ inside this directory automatically.'
     required: false
