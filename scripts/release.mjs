@@ -10,9 +10,12 @@ const exec = (cmd) => execSync(cmd, { stdio: 'inherit' })
 exec('git config user.email "github-actions[bot]@users.noreply.github.com"')
 exec('git config user.name "github-actions[bot]"')
 
-// dist/ をコミット (追跡済みファイルなので --force 不要)
+// dist/ をコミット (差分がある場合のみ)
 exec('git add dist/')
-exec(`git commit -m "chore: build dist for v${version} [skip ci]"`)
+const hasChanges = execSync('git status --porcelain dist/').toString().trim()
+if (hasChanges) {
+  exec(`git commit -m "chore: build dist for v${version} [skip ci]"`)
+}
 
 // changeset tag で v{version} タグを作成
 exec('pnpm changeset tag')
