@@ -1,5 +1,11 @@
 # nextjs-turbopack-bundle-analysis
 
+## 0.1.1
+
+### Patch Changes
+
+- 7d3b33d: change default value of `minimum-change-threshold` from `0` to `1024` (1 KB)
+
 ## 0.1.0
 
 ### Minor Changes
