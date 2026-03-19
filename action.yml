@@ -21,9 +21,9 @@ inputs:
     required: false
     default: '20'
   minimum-change-threshold:
-    description: 'Ignore routes with absolute size change smaller than this value in bytes (default: 0)'
+    description: 'Ignore routes with absolute size change smaller than this value in bytes (default: 1024)'
     required: false
-    default: '0'
+    default: '1024'
   skip-comment-if-empty:
     description: 'Skip posting PR comment if no changed routes are detected (default: false)'
     required: false
