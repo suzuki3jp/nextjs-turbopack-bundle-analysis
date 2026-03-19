@@ -17,7 +17,7 @@ function parseInputs(): ActionInputs {
     buildCommand: core.getInput('build-command') || 'npx next experimental-analyze',
     budget: budget ? parseInt(budget, 10) : undefined,
     budgetPercentIncreaseRed: budgetPercentIncreaseRed ? parseInt(budgetPercentIncreaseRed, 10) : 20,
-    minimumChangeThreshold: minimumChangeThreshold ? parseInt(minimumChangeThreshold, 10) : 0,
+    minimumChangeThreshold: minimumChangeThreshold ? parseInt(minimumChangeThreshold, 10) : 1024,
     skipCommentIfEmpty: core.getInput('skip-comment-if-empty') === 'true',
   };
 }

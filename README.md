@@ -70,7 +70,7 @@ The action posts a comment like this on pull requests:
 | `build-command`               | Command to build and analyze the bundle                                          | No       | `npx next experimental-analyze` |
 | `budget`                      | First-page load JS size budget in bytes. Routes exceeding this are marked with ⚠️ | No       | —                               |
 | `budget-percent-increase-red` | Percentage increase threshold to mark route as 🔴                                 | No       | `20`                            |
-| `minimum-change-threshold`    | Ignore routes with absolute size change smaller than this value in bytes         | No       | `0`                             |
+| `minimum-change-threshold`    | Ignore routes with absolute size change smaller than this value in bytes         | No       | `1024`                          |
 | `skip-comment-if-empty`       | Skip posting PR comment if no changed routes are detected                        | No       | `false`                         |
 
 ## Permissions
